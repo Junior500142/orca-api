@@ -223,6 +223,11 @@ trabalho, mas descobrir no Épico 22 atrasa duas semanas. Abrir a conta cedo mes
 e **confirmar a regra vigente na documentação do Play** antes do Épico 22, pois ela muda com
 frequência.
 
+**Atualização (2026-10-03, ver DEC-016):** a distribuição via Google Play foi parqueada —
+mesmo tratamento dado aqui ao iOS — em favor de PWA como canal principal por ora. Esta
+decisão **não foi descartada**: continua sendo o plano para quando o produto justificar
+app nativo publicado em loja.
+
 ---
 
 ## DEC-014 — Anti-overengineering com válvula de escape
@@ -264,6 +269,50 @@ atualizado → deployado`. Feio de propósito; depois dele, voltar e fazer os é
   só ensinam quando doem, e doem cedo se você deployar cedo.
 - *Arquitetural:* sem o skeleton, o produto só roda de ponta a ponta lá pelo Épico 12, e
   cada épico até lá é abstrato.
+
+---
+
+## DEC-016 — Distribuição via PWA (Expo Web), em vez de loja, por ora
+
+**Status:** decidida (2026-10-03).
+
+**Decisão:** o `orca-app` continua sendo construído com Expo/React Native e o blueprint
+feature-based (DEC-008 não muda). O que muda é o **alvo de distribuição**: em vez de build
+nativo publicado no Google Play, o app é exportado para **Expo Web** e servido como PWA
+instalável (manifest + service worker, "Adicionar à tela inicial"), hospedado como site
+estático. Não existe loja, não existe review, não existe o teste fechado de 14 dias.
+
+**Motivo:** o custo de loja não é principalmente financeiro — o Google Play cobra uma taxa
+única de US$ 25, não assinatura. O custo real é **processo e tempo**: conta de
+desenvolvedor, teste fechado de 12 testadores por 14 dias consecutivos (DEC-013), review.
+PWA elimina essa dependência por completo, sem exigir trocar de stack: o Expo já compila a
+mesma base de código para web ("universal app"), então o reaproveitamento da arquitetura já
+documentada (DEC-008, o blueprint inteiro) é quase total.
+
+**Consequências técnicas:**
+- `expo-secure-store` não existe na web — cai para `localStorage` (ou cookie). Token em
+  `localStorage` é mais exposto a XSS do que o Keychain/Keystore do SO. Risco aceito
+  conscientemente para o MVP; revisar se/quando migrar para build nativo (ver `DEBT`
+  correspondente em `orca-app/.specs/codebase/CONCERNS.md`).
+- EAS Build/Submit e Fastlane ficam parqueados — mesmo tratamento que o blueprint já dava
+  ao iOS — não removidos. O caminho para nativo continua existindo no mesmo código: é
+  questão de voltar a compilar para os alvos iOS/Android quando fizer sentido.
+- Deploy passa a ser hospedagem estática (Vercel, Render ou Netlify — **a decidir no Épico
+  10**), não mais EAS/loja.
+- Gesto e animação precisam ser validados no navegador, não só em device físico (ajusta
+  `TESTING.md` do orca-app).
+
+**Alternativas consideradas:**
+- Manter app nativo Android via Google Play (DEC-013 original) — parqueado por ora, não
+  descartado; motivo acima.
+- Reescrever um frontend web do zero (Next.js, Vite+React) — rejeitado. Descartaria DEC-008
+  e o blueprint feature-based inteiro sem necessidade real: o Expo já resolve "rodar em
+  web" sem abandonar nada do que já foi decidido. Contradiria DEC-014 (simplicidade como
+  default) trocar uma solução já validada por uma reescrita completa para o mesmo
+  resultado.
+
+**Relação com DEC-013:** este DEC substitui o *alvo* de distribuição de DEC-013 (loja →
+PWA), sem revogar a decisão de que Android é a prioridade sobre iOS. Ver nota em DEC-013.
 
 ---
 

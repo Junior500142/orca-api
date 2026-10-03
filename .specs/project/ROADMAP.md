@@ -112,7 +112,9 @@ na spec; transição de estado inválida é rejeitada.
 ## 10 — App: bootstrap + shared/ + tema provisório
 
 Ver roadmap do `orca-app` (a criar quando este épico começar) — cobre os itens 1–16 do
-checklist de bootstrap do blueprint.
+checklist de bootstrap do blueprint. Inclui, além do bootstrap original: configurar o
+target web do Expo (PWA — manifest, ícones, service worker) e decidir hospedagem estática
+(Vercel/Render/Netlify) — ver DEC-016.
 
 ## 11 — App: feature Auth como referência viva
 
@@ -187,8 +189,10 @@ entre empresas.
 
 ## 22 — MVP Release
 
-- [ ] Resolver definição de "MVP Release" (publicado na loja vs. teste fechado) — **em
-      aberto**.
-- [ ] Confirmar regra vigente de lead time do Google Play (DEC-013).
+- [ ] Resolver definição de "MVP Release" para o canal atual (PWA publicado e acessível
+      via URL estável) — **em aberto**, mas sem a pendência de lead time do Google Play
+      enquanto DEC-016 estiver vigente.
+- [ ] Se a distribuição voltar a ser loja (DEC-013 reativada) em vez de PWA, reabrir a
+      pendência de lead time do Google Play naquele momento.
 
 **Critério de verificação:** a detalhar quando a definição acima for resolvida.

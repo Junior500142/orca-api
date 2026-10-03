@@ -95,7 +95,8 @@ Dois repositórios, sem BFF:
 
 ```
 orca-api   NestJS. API REST + página pública do orçamento + geração de PDF.
-orca-app   React Native / Expo. App Android do dono do negócio.
+orca-app   React Native / Expo. App do dono do negócio, distribuído como PWA (DEC-016) —
+           mesma base de código Expo mantém aberto o caminho para app nativo Android depois.
 ```
 
 A página pública é web e vive no `orca-api` porque o cliente final abre um link pelo
