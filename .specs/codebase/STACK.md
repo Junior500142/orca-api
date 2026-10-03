@@ -2,12 +2,12 @@
 
 | Camada | Escolha | Versão |
 |---|---|---|
-| Runtime | Node.js | **a fixar no Épico 01** — use a LTS ativa no momento do setup |
-| Framework | NestJS | **a fixar no Épico 01** |
-| Linguagem | TypeScript (`strict: true`) | acompanha a versão do Nest |
-| Gerenciador de pacotes | **a decidir no Épico 01** (npm / pnpm / yarn) | — |
-| Banco | PostgreSQL | **a fixar no Épico 01** |
-| ORM | Prisma | **a fixar no Épico 01** |
+| Runtime | Node.js | 22.14.0 (LTS instalada na máquina de desenvolvimento) |
+| Framework | NestJS | **a fixar ao rodar `nest new`** |
+| Linguagem | TypeScript (`strict: true`) | Nest 11 gera `tsconfig.json` com strict parcial por padrão (`noImplicitAny: false`); trocado para `"strict": true` no Épico 01 para manter a decisão já registrada aqui. |
+| Gerenciador de pacotes | **npm** — decidido no Épico 01. Motivo: zero setup extra, é o que a documentação oficial do Nest usa, alinhado com DEC-014 (simplicidade como default). | 11.6.0 |
+| Banco | PostgreSQL | **a fixar no Épico 04** |
+| ORM | Prisma | **a fixar no Épico 04** |
 | PDF | Puppeteer (Chromium headless) | **a fixar no Épico 15** |
 | E-mail | Resend ou equivalente transacional | **a decidir no Épico 17** |
 | Container | Docker | — |
